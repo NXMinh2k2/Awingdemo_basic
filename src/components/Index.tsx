@@ -16,8 +16,6 @@ const Index = () => {
   const [activeNumber, setActiveNumber] = useState<number>(0)
   const [nameValue, setNameValue] = useState<string>()
   const [titleValue, setTitleValue] = useState<string>()
-  const [emailValue, setEmailValue] = useState<string>("")
-  const [idValue, setIdValue] = useState<string>("")
   const [views, setViews] = useState<viewsDefault[]>(viewsData)
 
   const onChangeNameValue = (nameValue:string) => {
@@ -26,14 +24,6 @@ const Index = () => {
 
   const onChangeTitleValue = (titleValue:string) => {
     setTitleValue(titleValue)
-  }
-
-  const onChangeEmailValue = (emailValue:string) => {
-    setEmailValue(emailValue)
-  }
-
-  const onChangeIdValue = (idValue:string) => {
-    setIdValue(idValue)
   }
 
   const handleSubmit = () => {
@@ -47,22 +37,17 @@ const Index = () => {
         if(view.templateId == 0) {
           alert("Vui lòng nhập đầy đủ thông tin")
           setIsSubmit(true)
-        } else if(view.templateId == 1) {
-          if(emailValue == "" || emailValue == undefined) {
-            alert("Vui lòng nhập đầy đủ thông tin")
-            setIsSubmit(true)
-          } else {
-            setViews([...views, {isValid: false , templateId: 0, templateDatas: []}])
-          }
+        } else if (view.templateId == 1) {
+            if(views[index].templateDatas[0].fieldValue == "" || views[index].templateDatas[0].fieldValue == undefined) {
+              alert("Vui lòng nhập đầy đủ thông tin")
+              setIsSubmit(true)
+            }
         } else if(view.templateId == 2) {
-          if(idValue == "" || idValue == undefined) {
-            alert("Vui lòng nhập đầy đủ thông tin")
-            setIsSubmit(true)
-          } else {
-            setViews([...views, {isValid: false , templateId: 0, templateDatas: []}])
-          }
-        }
-      })
+            if(views[index].templateDatas[0].fieldValue == "" || views[index].templateDatas[0].fieldValue == undefined) {
+              alert("Vui lòng nhập đầy đủ thông tin")
+              setIsSubmit(true)
+            }
+      }})
     }
   }
 
@@ -91,8 +76,7 @@ const Index = () => {
               setViews={setViews}
               isSubmit={isSubmit}
               setIsSubmit={setIsSubmit}
-              onChangeEmailValue1={(emailValue) => onChangeEmailValue(emailValue)}
-              onChangeIdValue1={(idValue) => onChangeIdValue(idValue)}
+
             />
         }
     </div>

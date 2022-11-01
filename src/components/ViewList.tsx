@@ -6,8 +6,6 @@ interface Props {
   setViews: React.Dispatch<React.SetStateAction<viewsDefault[]>>
   isSubmit: boolean
   setIsSubmit: React.Dispatch<React.SetStateAction<boolean>>
-  onChangeEmailValue1: (emailValue: any) => any
-  onChangeIdValue1: (emailValue: any) => any
 }
 
 export interface templateData {
@@ -24,7 +22,7 @@ export interface viewsDefault {
 }
 
 const ViewList = (props:Props) => {
-  const {views, setViews, isSubmit, setIsSubmit, onChangeEmailValue1, onChangeIdValue1} = props
+  const {views, setViews, isSubmit, setIsSubmit} = props
 
   const templateData:templateData = {
     fieldName: "",
@@ -34,56 +32,49 @@ const ViewList = (props:Props) => {
   }
   
   const [activeId, setActiveId] = useState<number>(0)
-  const [emailValue, setEmailValue] = useState<string>("")
-  const [idValue, setIdValue] = useState<string>("")
 
   const handleChangeTemplate = (newView: viewsDefault, index: number) => {
-    let newViews = [...views];
-    newViews[index] = newView;
-    setViews(newViews);
+    let newViews = [...views]
+    newViews[index] = newView
+    setViews(newViews)
     setIsSubmit(false)
   }
   
-
   const handleAddView = () => {
     views.map((view, index) => {
       if(view.templateId == 0) {
         alert("Vui lòng nhập đầy đủ thông tin")
-        setIsSubmit(true)
-      } else if(view.templateId == 1) {
-        if(emailValue == "" || emailValue == undefined) {
-          alert("Vui lòng nhập đầy đủ thông tin")
-          setIsSubmit(true)
-        } else {
-          setViews([...views, {isValid: false , templateId: 0, templateDatas: []}])
-          setActiveId(prev => prev + 1)
-        }
+      } else if (view.templateId == 1) {
+          if(views[index].templateDatas[0].fieldValue == "" || views[index].templateDatas[0].fieldValue == undefined) {
+            alert("Vui lòng nhập đầy đủ thông tin")
+            setIsSubmit(true)
+          } else {
+            setViews([...views, {isValid: false , templateId: 0, templateDatas: []}])
+            setActiveId(prev => prev + 1)
+          }
       } else if(view.templateId == 2) {
-        if(idValue == "" || idValue == undefined) {
+        if(views[index].templateDatas[0].fieldValue == "" || views[index].templateDatas[0].fieldValue == undefined) {
           alert("Vui lòng nhập đầy đủ thông tin")
           setIsSubmit(true)
         } else {
           setViews([...views, {isValid: false , templateId: 0, templateDatas: []}])
           setActiveId(prev => prev + 1)
         }
+    }})
+  }
+
+  const handleChange = (index:number, fieldName: string, fieldValue: string) => {  
+    setIsSubmit(false)  
+    let newView = views[index];
+
+    newView.templateDatas.map(templateData => {
+      if(templateData.fieldName == fieldName) {
+        templateData.fieldValue = fieldValue
+        setViews([newView])
       }
     })
-    // setViews([...views, {isValid: false , templateId: 0, templateDatas: []}])
-    // setActiveId(prev => prev + 1)
   }
-
   console.log(views)
-
-  const onChangeEmailValue = (emailValue:string) => {
-    setEmailValue(emailValue)
-  }
-
-  const onChangeIdValue = (idValue:string) => {
-    setIdValue(idValue)
-  }
-
-  onChangeEmailValue1(emailValue)
-  onChangeIdValue1(idValue)
 
   return (
     <div>
@@ -116,8 +107,7 @@ const ViewList = (props:Props) => {
                 activeId={activeId}
                 view={view}
                 onChangeTemplate = {(newView) => handleChangeTemplate(newView, index)}
-                onChangeEmailValue={(emailValue) => onChangeEmailValue(emailValue)}
-                onChangeIdValue={(idValue) => onChangeIdValue(idValue)}
+                onChangeInputValue={(fieldName, fieldValue) => handleChange(index, fieldName, fieldValue)}
               />
             </div>
           )
