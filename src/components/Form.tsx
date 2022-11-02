@@ -1,30 +1,26 @@
 import React, { useState } from 'react'
 
 interface Props {
-  onChangeNameValue: (childData: any) => void
-  onChangeTitleValue: (titleValue: any) => any
   isSubmit: boolean
+  onChangeInputValue: (value: any) => any
 }
 
 const Form = (props:Props) => {
-  const {onChangeNameValue, onChangeTitleValue, isSubmit} = props
+  const {isSubmit, onChangeInputValue} = props
   
   const [nameValue, setNameValue] = useState<string>()
   const [titleValue, setTitleValue] = useState<string>()
-  
-  onChangeNameValue(nameValue)
-  onChangeTitleValue(titleValue)
   
   return (
     <div>
       <div>
         <label htmlFor="">Name</label>
-        <input value={nameValue} onChange={(e) => setNameValue(e.target.value)}/>
+        <input value={nameValue} onChange={(e) => onChangeInputValue(e.target.value)}/>
         {isSubmit && (nameValue=="" || nameValue == undefined) && <span className='active'>error</span>}
       </div>
       <div>
         <label htmlFor="">Title</label>
-        <input value={titleValue} onChange={(e) => setTitleValue(e.target.value)}/>
+        <input value={titleValue} onChange={(e) => onChangeInputValue(e.target.value)}/>
         {isSubmit && (titleValue=="" || titleValue == undefined) && <span className='active'>error</span>}
      </div>
     </div>

@@ -14,21 +14,15 @@ const Index = () => {
 
   const [isSubmit, setIsSubmit] = useState<boolean>(false)
   const [activeNumber, setActiveNumber] = useState<number>(0)
-  const [nameValue, setNameValue] = useState<string>()
-  const [titleValue, setTitleValue] = useState<string>()
   const [views, setViews] = useState<viewsDefault[]>(viewsData)
+  const [value, setValue] = useState<string>()
 
-  const onChangeNameValue = (nameValue:string) => {
-    setNameValue(nameValue)
+  const handleChangeValue = (value:string) => {
+      setValue(value)
   }
-
-  const onChangeTitleValue = (titleValue:string) => {
-    setTitleValue(titleValue)
-  }
-
   const handleSubmit = () => {
     if(activeNumber == 0) {
-      if(nameValue == "" || nameValue == undefined || titleValue == "" || titleValue == undefined) {
+      if(value == "" || value == undefined || value == "" || value == undefined) {
         alert("Vui lòng nhập đầy đủ thông tin")
         setIsSubmit(true)
       }
@@ -66,16 +60,14 @@ const Index = () => {
         {
             activeNumber == 0 ? 
             <Form 
-              onChangeNameValue={(nameValue) => onChangeNameValue(nameValue)}
-              onChangeTitleValue={(titleValue) => onChangeTitleValue(titleValue)}
               isSubmit={isSubmit}
+              onChangeInputValue={(value) => handleChangeValue(value)}
             /> : 
             <ViewList 
               views={views}
               setViews={setViews}
               isSubmit={isSubmit}
               setIsSubmit={setIsSubmit}
-
             />
         }
     </div>
