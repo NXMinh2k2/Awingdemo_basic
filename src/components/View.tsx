@@ -25,7 +25,7 @@ const View = (props:Props) => {
                 fieldName: "email",
                 fieldValue: "",
                 label: "email",
-                isRequired: false
+                isRequired: true
                 },{
                 fieldName: "age",
                 fieldValue: "",
@@ -44,12 +44,12 @@ const View = (props:Props) => {
                 fieldName: "id",
                 fieldValue: "",
                 label: "id",
-                isRequired: false
+                isRequired: true
                 },{
                 fieldName: "username",
                 fieldValue: "",
                 label: "username",
-                isRequired: false
+                isRequired: true
                 },{
                 fieldName: "password",
                 fieldValue: "",
@@ -63,6 +63,8 @@ const View = (props:Props) => {
     onChangeTemplate(newView)
 }
 
+console.log(isSubmit)
+
   return (
     <div className={viewIndex == activeId ? "" : "template"}>
         <span>Template</span>
@@ -71,7 +73,7 @@ const View = (props:Props) => {
             <option value="1">Template 1</option>
             <option value="2">Template 2</option>
         </select>
-        {isSubmit && (templateId == 0) &&  <span className='active'>error</span>}
+        {isSubmit && <span className='active'>error</span>}
         <div>
             {
                 view.templateDatas && view.templateDatas.map((data, index) => {
@@ -102,6 +104,7 @@ const View = (props:Props) => {
                         return  <div key={index}>
                                     <label>{data.fieldName}</label>
                                     <input value={data.fieldValue} onChange={(e) => onChangeInputValue(data.fieldName, e.target.value)}/>
+                                    {isSubmit && <span className='active'>error</span>}
                                 </div>
                     case "password": 
                         return <div key={index}>

@@ -44,25 +44,19 @@ const ViewList = (props:Props) => {
     views.map((view, index) => {
       if(view.templateId == 0) {
         alert("Vui lòng nhập đầy đủ thông tin")
-      } else if (view.templateId == 1) {
-          if(views[index].templateDatas[0].fieldValue == "" || views[index].templateDatas[0].fieldValue == undefined) {
-            alert("Vui lòng nhập đầy đủ thông tin")
-            setIsSubmit(true)
-          } else {
-            setViews([...views, {isValid: false , templateId: 0, templateDatas: []}])
-            setActiveId(prev => prev + 1)
-          }
-      } else if(view.templateId == 2) {
-        if(views[index].templateDatas[0].fieldValue == "" || views[index].templateDatas[0].fieldValue == undefined) {
+        setIsSubmit(true)
+      } else {
+        let fieldRequireds = views[index].templateDatas.filter(x=> x.isRequired);
+        let isValid = fieldRequireds.filter(x=> !x.fieldValue).length
+        if(isValid > 0) {
           alert("Vui lòng nhập đầy đủ thông tin")
           setIsSubmit(true)
         } else {
-          setViews([...views, {isValid: false , templateId: 0, templateDatas: []}])
-          setActiveId(prev => prev + 1)
-        }
+            setViews([...views, {isValid: false , templateId: 0, templateDatas: []}])
+            setActiveId(prev => prev + 1)
+          }
     }})
   }
-
   const handleChange = (index:number, fieldName: string, fieldValue: string) => {  
     setIsSubmit(false)  
     let newView = views[index];
@@ -74,7 +68,6 @@ const ViewList = (props:Props) => {
       }
     })
   }
-  console.log(views)
 
   return (
     <div>
