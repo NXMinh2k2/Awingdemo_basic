@@ -37,9 +37,7 @@ const Index = () => {
           if(isValid > 0) {
             alert("Vui lòng nhập đầy đủ thông tin")
             setIsSubmit(true)
-          } else {
-              setViews([...views, {isValid: false , templateId: 0, templateDatas: []}])
-            }
+          }
       }})
     }
   }

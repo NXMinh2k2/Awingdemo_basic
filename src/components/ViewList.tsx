@@ -42,29 +42,35 @@ const ViewList = (props:Props) => {
   
   const handleAddView = () => {
     views.map((view, index) => {
-      if(view.templateId == 0) {
-        alert("Vui lòng nhập đầy đủ thông tin")
-        setIsSubmit(true)
-      } else {
-        let fieldRequireds = views[index].templateDatas.filter(x=> x.isRequired);
-        let isValid = fieldRequireds.filter(x=> !x.fieldValue).length
-        if(isValid > 0) {
+      if(activeId == index) {
+        if(view.templateId == 0) {
           alert("Vui lòng nhập đầy đủ thông tin")
           setIsSubmit(true)
         } else {
-            setViews([...views, {isValid: false , templateId: 0, templateDatas: []}])
-            setActiveId(prev => prev + 1)
-          }
-    }})
+          let fieldRequireds = views[index].templateDatas.filter(x=> x.isRequired);
+          let isValid = fieldRequireds.filter(x=> !x.fieldValue).length > 0
+          if(isValid) {
+            alert("Vui lòng nhập đầy đủ thông tin")
+            setIsSubmit(true)
+          } else {
+              setViews([...views, {isValid: false , templateId: 0, templateDatas: []}])
+              setActiveId(prev => prev + 1)
+            }
+        }
+      }
+    })
   }
+
+  console.log(views)
+
   const handleChange = (index:number, fieldName: string, fieldValue: string) => {  
     setIsSubmit(false)  
     let newView = views[index];
 
-    newView.templateDatas.map(templateData => {
+    views[index].templateDatas.map((templateData) => {
       if(templateData.fieldName == fieldName) {
         templateData.fieldValue = fieldValue
-        setViews([newView])
+        // setViews([newView])
       }
     })
   }
@@ -90,7 +96,7 @@ const ViewList = (props:Props) => {
         <button onClick={handleAddView}>+</button>
       </div>
       {
-        views.map((view,index) => {
+        views.map((view, index) => {
           return (
             <div key={index}>
               <View 

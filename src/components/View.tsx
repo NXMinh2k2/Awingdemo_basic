@@ -62,9 +62,6 @@ const View = (props:Props) => {
     let newView = {...view, templateId: templateId, templateDatas: newTemplateData};
     onChangeTemplate(newView)
 }
-
-console.log(isSubmit)
-
   return (
     <div className={viewIndex == activeId ? "" : "template"}>
         <span>Template</span>
@@ -81,35 +78,35 @@ console.log(isSubmit)
                     case "email": 
                         return  <div key={index}>
                                     <label>{data.fieldName}</label>
-                                    <input value={data.fieldValue} onChange={(e) => onChangeInputValue(data.fieldName, e.target.value)}/>
+                                    <input onChange={(e) => onChangeInputValue(data.fieldName, e.target.value)}/>
                                     {isSubmit  && <span className='active'>error</span>}
                                 </div> 
                     case "age": 
                         return  <div key={index}>
                                     <label>{data.fieldName}</label>
-                                    <input value={data.fieldValue} onChange={(e) => onChangeInputValue(data.fieldName, e.target.value)}/>
+                                    <input onChange={(e) => onChangeInputValue(data.fieldName, e.target.value)}/>
                                 </div>
                     case "gender": 
                         return  <div key={index}>
                                     <label>{data.fieldName}</label>
-                                    <input value={data.fieldValue} onChange={(e) => onChangeInputValue(data.fieldName, e.target.value)}/>
+                                    <input onChange={(e) => onChangeInputValue(data.fieldName, e.target.value)}/>
                                 </div>
                     case "id": 
                         return  <div key={index}>
                                     <label>{data.fieldName}</label>
-                                    <input value={data.fieldValue} onChange={(e) => onChangeInputValue(data.fieldName, e.target.value)}/>
+                                    <input onChange={(e) => onChangeInputValue(data.fieldName, e.target.value)}/>
                                     {isSubmit && <span className='active'>error</span>}
                                 </div>
                     case "username": 
                         return  <div key={index}>
                                     <label>{data.fieldName}</label>
-                                    <input value={data.fieldValue} onChange={(e) => onChangeInputValue(data.fieldName, e.target.value)}/>
+                                    <input onChange={(e) => onChangeInputValue(data.fieldName, e.target.value)}/>
                                     {isSubmit && <span className='active'>error</span>}
                                 </div>
                     case "password": 
                         return <div key={index}>
                                     <label>{data.fieldName}</label>
-                                    <input value={data.fieldValue} onChange={(e) => onChangeInputValue(data.fieldName, e.target.value)}/>
+                                    <input onChange={(e) => onChangeInputValue(data.fieldName, e.target.value)}/>
                                 </div>
                     default:
                         return "";
