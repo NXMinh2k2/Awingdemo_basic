@@ -12,7 +12,7 @@ interface Props{
 }
 
 const View = (props:Props) => {
-    const {view, setViews, viewIndex, activeId, onChangeTemplate, isSubmit, onChangeInputValue} = props
+    const {view, viewIndex, activeId, onChangeTemplate, isSubmit, onChangeInputValue} = props
     const [templateId, setTemplateId] = useState<number>()
 
     const handleChangeTemplate = (e:React.ChangeEvent<HTMLSelectElement>) => {
@@ -78,7 +78,7 @@ const View = (props:Props) => {
                     case "email": 
                         return  <div key={index}>
                                     <label>{data.fieldName}</label>
-                                    <input onChange={(e) => onChangeInputValue(data.fieldName, e.target.value)}/>
+                                    <input data-testid='email' onChange={(e) => onChangeInputValue(data.fieldName, e.target.value)}/>
                                     {isSubmit  && <span className='active'>error</span>}
                                 </div> 
                     case "age": 

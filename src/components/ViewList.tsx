@@ -61,8 +61,6 @@ const ViewList = (props:Props) => {
     })
   }
 
-  console.log(views)
-
   const handleChange = (index:number, fieldName: string, fieldValue: string) => {  
     setIsSubmit(false)  
     let newView = views[index];
@@ -70,7 +68,6 @@ const ViewList = (props:Props) => {
     views[index].templateDatas.map((templateData) => {
       if(templateData.fieldName == fieldName) {
         templateData.fieldValue = fieldValue
-        // setViews([newView])
       }
     })
   }

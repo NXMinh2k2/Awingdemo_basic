@@ -15,12 +15,12 @@ const Form = (props:Props) => {
     <div>
       <div>
         <label htmlFor="">Name</label>
-        <input value={nameValue} onChange={(e) => onChangeInputValue(e.target.value)}/>
+        <input data-testid='name' value={nameValue} onChange={(e) => onChangeInputValue(e.target.value)}/>
         {isSubmit && (nameValue=="" || nameValue == undefined) && <span className='active'>error</span>}
       </div>
       <div>
         <label htmlFor="">Title</label>
-        <input value={titleValue} onChange={(e) => onChangeInputValue(e.target.value)}/>
+        <input data-testid='title' value={titleValue} onChange={(e) => onChangeInputValue(e.target.value)}/>
         {isSubmit && (titleValue=="" || titleValue == undefined) && <span className='active'>error</span>}
      </div>
     </div>
