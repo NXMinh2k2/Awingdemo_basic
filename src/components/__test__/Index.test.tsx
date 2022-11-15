@@ -1,4 +1,4 @@
-import { getAllByAltText, getAllByText, getByAltText, getNodeText, render, screen } from "@testing-library/react"
+import { fireEvent, getAllByAltText, getAllByText, getByAltText, getNodeText, render, screen } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
 import Index from '../Index'
 
@@ -26,13 +26,34 @@ describe('Index', () => {
         expect(errorSpan).toHaveLength(2)
     })
 
-    test('Should display error if email is empty when click button +', () => {
+    test('Test case', async () => {
         render(<Index />)
-        const addButton = screen.getByRole('button', {name: /\+/i})
+        const oneButton = screen.getByRole('button', {name: /1/i})
+        await userEvent.click(oneButton)
+        expect(screen.getByRole('button', {name: /view 0/i})).toBeInTheDocument()
+        expect(screen.getByRole('button', {name: /\+/i})).toBeInTheDocument()
+        expect(screen.getByText("Template")).toBeInTheDocument()
+        const options = screen.getAllByTestId('select-option')
+        const combobox = screen.getByRole('combobox')
+        await userEvent.selectOptions(combobox, '1')
+        expect(options[1].ariaSelected).toBeTruthy
+        
+        const emailLabel = screen.getByText(/email/i)
+        const ageLabel = screen.getByText(/age/i)
+        const genderLabel = screen.getByText(/gender/i)
         const emailInput = screen.getByTestId('email')
-        userEvent.type(emailInput, '')
-        userEvent.click(addButton)
+        const ageInput = screen.getByTestId('age')
+        const genderInput = screen.getByTestId('gender')
+        expect(emailLabel).toBeInTheDocument()
+        expect(ageLabel).toBeInTheDocument()
+        expect(genderLabel).toBeInTheDocument()
+        expect(emailInput).toBeInTheDocument()
+        expect(ageInput).toBeInTheDocument()
+        expect(genderInput).toBeInTheDocument()
 
+        userEvent.type(emailInput, '')
+        const addButton = screen.getByRole('button', { name: /\+/i})
+        userEvent.click(addButton)
         const errorSpan = screen.getAllByText('error')
         expect(errorSpan).toHaveLength(2)
     })

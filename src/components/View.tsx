@@ -66,9 +66,9 @@ const View = (props:Props) => {
     <div className={viewIndex == activeId ? "" : "template"}>
         <span>Template</span>
         <select onChange={(e) => handleChangeTemplate(e)}>
-            <option value="0">None</option>
-            <option value="1">Template 1</option>
-            <option value="2">Template 2</option>
+            <option data-testid="select-option" value="0">None</option>
+            <option data-testid="select-option" value="1">Template 1</option>
+            <option data-testid="select-option" value="2">Template 2</option>
         </select>
         {isSubmit && <span className='active'>error</span>}
         <div>
@@ -84,12 +84,12 @@ const View = (props:Props) => {
                     case "age": 
                         return  <div key={index}>
                                     <label>{data.fieldName}</label>
-                                    <input onChange={(e) => onChangeInputValue(data.fieldName, e.target.value)}/>
+                                    <input data-testid='age' onChange={(e) => onChangeInputValue(data.fieldName, e.target.value)}/>
                                 </div>
                     case "gender": 
                         return  <div key={index}>
                                     <label>{data.fieldName}</label>
-                                    <input onChange={(e) => onChangeInputValue(data.fieldName, e.target.value)}/>
+                                    <input data-testid='gender' onChange={(e) => onChangeInputValue(data.fieldName, e.target.value)}/>
                                 </div>
                     case "id": 
                         return  <div key={index}>
