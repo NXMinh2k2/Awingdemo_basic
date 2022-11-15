@@ -26,7 +26,7 @@ describe('Index', () => {
         expect(errorSpan).toHaveLength(2)
     })
 
-    test('Test case', async () => {
+    test('Render Template when click button 1 and check selected option', async () => {
         render(<Index />)
         const oneButton = screen.getByRole('button', {name: /1/i})
         await userEvent.click(oneButton)
@@ -37,7 +37,15 @@ describe('Index', () => {
         const combobox = screen.getByRole('combobox')
         await userEvent.selectOptions(combobox, '1')
         expect(options[1].ariaSelected).toBeTruthy
-        
+    })
+
+    test('Render Template 1 when select option 1', async () => {{
+        render(<Index />)
+        const oneButton = screen.getByRole('button', {name: /1/i})
+        await userEvent.click(oneButton)
+        const combobox = screen.getByRole('combobox')
+        await userEvent.selectOptions(combobox, '1')
+
         const emailLabel = screen.getByText(/email/i)
         const ageLabel = screen.getByText(/age/i)
         const genderLabel = screen.getByText(/gender/i)
@@ -50,11 +58,20 @@ describe('Index', () => {
         expect(emailInput).toBeInTheDocument()
         expect(ageInput).toBeInTheDocument()
         expect(genderInput).toBeInTheDocument()
-
+    }})
+        
+    test('Show error when value email is empty', async () => {
+        render(<Index />)
+        const oneButton = screen.getByRole('button', {name: /1/i})
+        await userEvent.click(oneButton)
+        const combobox = screen.getByRole('combobox')
+        await userEvent.selectOptions(combobox, '1')
+        const emailInput = screen.getByTestId('email')
         userEvent.type(emailInput, '')
         const addButton = screen.getByRole('button', { name: /\+/i})
         userEvent.click(addButton)
         const errorSpan = screen.getAllByText('error')
         expect(errorSpan).toHaveLength(2)
     })
- })
+})
+    
