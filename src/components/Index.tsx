@@ -73,18 +73,3 @@ const Index = () => {
 }
 
 export default Index
-
-// import React from 'react'
-
-// export const isPositive = (n:number) => {
-//   return n > 0
-// }
-
-// const Index = () => {
-//   return (
-//     <div>Index</div>
-//     )
-//   }
-  
-
-// export default Index

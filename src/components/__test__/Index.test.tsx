@@ -5,12 +5,12 @@ import Index from '../Index'
 describe('Index', () => { 
     test('render correctly', () => {
         render(<Index />)
-        const labelNameElement = screen.getByText("Name")
-        const labelTitleElement = screen.getByText("Title")
         const submitButton = screen.getByRole('button', {name: 'Submit'})
-        expect(labelNameElement).toBeInTheDocument()
-        expect(labelTitleElement).toBeInTheDocument()    
-        expect(submitButton).toBeInTheDocument()    
+        const zerobutton = screen.getByRole('button', {name: /0/i})
+        const onebutton = screen.getByRole('button', {name: /1/i})
+        expect(submitButton).toBeInTheDocument()
+        expect(zerobutton).toBeInTheDocument()
+        expect(onebutton).toBeInTheDocument()
     })
 
     test('Should display error if name and title are empty when click button', () => {
@@ -37,14 +37,6 @@ describe('Index', () => {
         const combobox = screen.getByRole('combobox')
         await userEvent.selectOptions(combobox, '1')
         expect(options[1].ariaSelected).toBeTruthy
-    })
-
-    test('Render Template 1 when select option 1', async () => {{
-        render(<Index />)
-        const oneButton = screen.getByRole('button', {name: /1/i})
-        await userEvent.click(oneButton)
-        const combobox = screen.getByRole('combobox')
-        await userEvent.selectOptions(combobox, '1')
 
         const emailLabel = screen.getByText(/email/i)
         const ageLabel = screen.getByText(/age/i)
@@ -58,7 +50,8 @@ describe('Index', () => {
         expect(emailInput).toBeInTheDocument()
         expect(ageInput).toBeInTheDocument()
         expect(genderInput).toBeInTheDocument()
-    }})
+    })
+
         
     test('Show error when value email is empty', async () => {
         render(<Index />)
@@ -72,6 +65,18 @@ describe('Index', () => {
         userEvent.click(addButton)
         const errorSpan = screen.getAllByText('error')
         expect(errorSpan).toHaveLength(2)
+    })
+
+    test('Active button when click to it', async () => {
+        render(<Index />)
+
+        const zerobutton = screen.getByRole('button', {name: /0/i})
+        await userEvent.click(zerobutton)
+        expect(zerobutton).toHaveClass('active')
+
+        const oneButton = screen.getByRole('button', {name: /1/i})
+        await userEvent.click(oneButton)
+        expect(oneButton).toHaveClass('active')
     })
 })
     

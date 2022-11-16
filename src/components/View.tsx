@@ -94,19 +94,19 @@ const View = (props:Props) => {
                     case "id": 
                         return  <div key={index}>
                                     <label>{data.fieldName}</label>
-                                    <input onChange={(e) => onChangeInputValue(data.fieldName, e.target.value)}/>
+                                    <input data-testid='id' onChange={(e) => onChangeInputValue(data.fieldName, e.target.value)}/>
                                     {isSubmit && <span className='active'>error</span>}
                                 </div>
                     case "username": 
                         return  <div key={index}>
                                     <label>{data.fieldName}</label>
-                                    <input onChange={(e) => onChangeInputValue(data.fieldName, e.target.value)}/>
+                                    <input data-testid='username' onChange={(e) => onChangeInputValue(data.fieldName, e.target.value)}/>
                                     {isSubmit && <span className='active'>error</span>}
                                 </div>
                     case "password": 
                         return <div key={index}>
                                     <label>{data.fieldName}</label>
-                                    <input onChange={(e) => onChangeInputValue(data.fieldName, e.target.value)}/>
+                                    <input data-testid='password' onChange={(e) => onChangeInputValue(data.fieldName, e.target.value)}/>
                                 </div>
                     default:
                         return "";
