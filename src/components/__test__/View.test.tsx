@@ -74,4 +74,41 @@ describe('View', () => {
         expect(usernameInput).toBeInTheDocument()
         expect(passwordInput).toBeInTheDocument()  
     }})
+
+    test('handlers are called', async () => {
+        const onChangeInputValueHandler = jest.fn()
+        const onChangeTemplateHandler = jest.fn()
+        render(<View view={{
+            templateId: 1,
+            templateDatas: [{ 
+                fieldName: "email",
+                fieldValue: "",
+                label: "email",
+                isRequired: true
+                },{
+                fieldName: "age",
+                fieldValue: "",
+                label: "age",
+                isRequired: false
+                }, {
+                fieldName: "gender",
+                fieldValue: "",
+                label: "gender",
+                isRequired: false
+                }],
+            isValid: false
+          }
+        } 
+        onChangeTemplate={onChangeTemplateHandler}
+        onChangeInputValue={onChangeInputValueHandler}
+        />)
+
+        const combobox = screen.getByRole('combobox')
+        await userEvent.selectOptions(combobox, '1')
+        expect(onChangeTemplateHandler).toHaveBeenCalledTimes(1)
+
+        const emailInput = screen.getByTestId('email')
+        await userEvent.type(emailInput, '1')
+        expect(onChangeInputValueHandler).toHaveBeenCalledTimes(1)
+    })
 });

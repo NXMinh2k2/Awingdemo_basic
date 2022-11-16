@@ -46,4 +46,19 @@ describe('Name of the group', () => {
       expect(zeroViewButton).toBeInTheDocument()
       expect(oneViewButton).toBeInTheDocument()
     })
+
+    test('handler are called', async () => {
+      const setIsSubmitHandler = jest.fn()
+      render(<ViewList views={[{
+        templateId: 0,
+        templateDatas: [],
+        isValid: false
+      }]}
+        setIsSubmit={setIsSubmitHandler}
+      />)
+
+      const addButton =  screen.getByRole('button', {name: /\+/i})
+      await userEvent.click(addButton)
+      expect(setIsSubmitHandler).toHaveBeenCalledTimes(1)
+    })
 });

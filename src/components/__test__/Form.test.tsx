@@ -18,7 +18,7 @@ describe('Form', () => {
 
     test('Check value input', () => {
         const onChangeInputValueHandler = jest.fn()
-        render(<Form onChangeInputValue={onChangeInputValueHandler}/>)
+        render(<Form isSubmit={false} onChangeInputValue={onChangeInputValueHandler}/>)
         const nameInput = screen.getByTestId('name')
         const titleInput = screen.getByTestId('title')
 
@@ -30,7 +30,7 @@ describe('Form', () => {
 
     test('handlers are called', () => {
         const onChangeInputValueHandler = jest.fn()
-        render(<Form onChangeInputValue={onChangeInputValueHandler}/>)
+        render(<Form isSubmit={false} onChangeInputValue={onChangeInputValueHandler}/>)
         const nameInput = screen.getByTestId('name')
         userEvent.type(nameInput, '1')
         expect(onChangeInputValueHandler).toHaveBeenCalledTimes(1)
